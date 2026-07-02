@@ -1,0 +1,36 @@
+{
+    "title": "India Sulekha Services Scraper Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "keyword": {
+            "title": "Keyword (Category)",
+            "type": "string",
+            "description": "The specific service category (e.g., 'packers and movers', 'caterers', 'pest control').",
+            "editor": "textfield",
+            "prefill": "packers and movers"
+        },
+        "location": {
+            "title": "Location (City)",
+            "type": "string",
+            "description": "The Indian City (e.g., 'Chennai', 'Hyderabad', 'Pune').",
+            "editor": "textfield",
+            "prefill": "Chennai"
+        },
+        "maxLeads": {
+            "title": "Maximum Leads",
+            "type": "integer",
+            "description": "Maximum number of Indian service leads to extract.",
+            "default": 100,
+            "minimum": 1
+        },
+        "proxyConfiguration": {
+            "title": "Proxy Configuration",
+            "type": "object",
+            "description": "Proxy settings. Apify Residential Proxy (India targeted) is highly required.",
+            "prefill": { "useApifyProxy": true },
+            "editor": "proxy"
+        }
+    },
+    "required": ["keyword", "location"]
+}

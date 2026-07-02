@@ -1,0 +1,37 @@
+{
+    "actorSpecification": 1,
+    "name": "india-sulekha-services-scraper",
+    "title": "India Sulekha Services Scraper",
+    "description": "Extract verified service providers, contractors, and local businesses from Sulekha India. High-quality B2B local service leads.",
+    "version": "1.0",
+    "input": "./input_schema.json",
+    "dockerfile": "./Dockerfile",
+    "minMemoryMbytes": 1024,
+    "maxMemoryMbytes": 4096,
+    "pricingModel": "PAY_PER_EVENT",
+    "pricingEvents": [
+        {
+            "eventName": "apify-actor-start",
+            "pricePerEvent": 0.25,
+            "description": "Base fee for starting the crawler (Playwright overhead)"
+        },
+        {
+            "eventName": "lead-extracted",
+            "pricePerEvent": 0.002,
+            "description": "Charged per Indian local service lead successfully extracted ($2.00 per 1k leads)"
+        }
+    ],
+    "isPublic": true,
+    "seoTitle": "India Sulekha Services Scraper | Verified B2B Lead Extractor",
+    "seoDescription": "Scrape top-rated packers & movers, tutors, decorators, and contractors in India from Sulekha. Extract direct contact numbers and verified addresses.",
+    "categories": [
+        "LEAD_GENERATION",
+        "BUSINESS",
+        "JOBS"
+    ],
+    "defaultRunOptions": {
+        "build": "latest",
+        "timeoutSecs": 3600,
+        "memoryMbytes": 1024
+    }
+}

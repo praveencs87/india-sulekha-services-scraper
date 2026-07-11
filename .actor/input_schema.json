@@ -3,19 +3,14 @@
     "type": "object",
     "schemaVersion": 1,
     "properties": {
-        "keyword": {
-            "title": "Keyword (Category)",
-            "type": "string",
-            "description": "The specific service category (e.g., 'packers and movers', 'caterers', 'pest control').",
-            "editor": "textfield",
-            "prefill": "packers and movers"
-        },
-        "location": {
-            "title": "Location (City)",
-            "type": "string",
-            "description": "The Indian City (e.g., 'Chennai', 'Hyderabad', 'Pune').",
-            "editor": "textfield",
-            "prefill": "Chennai"
+        "startUrls": {
+            "title": "Start URLs",
+            "type": "array",
+            "description": "List of search URLs to scrape.",
+            "editor": "requestListSources",
+            "prefill": [
+                { "url": "https://www.sulekha.com/packers-and-movers/chennai" }
+            ]
         },
         "maxLeads": {
             "title": "Maximum Leads",
@@ -32,5 +27,5 @@
             "editor": "proxy"
         }
     },
-    "required": ["keyword", "location"]
+    "required": ["startUrls"]
 }

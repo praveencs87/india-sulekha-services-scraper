@@ -7,8 +7,7 @@ await Actor.init();
 try {
     const input = await Actor.getInput();
     const { 
-        keyword = 'packers and movers', 
-        location = 'Chennai', 
+        startUrls = [],
         maxLeads = 100,
         proxyConfiguration 
     } = input || {};
@@ -19,7 +18,7 @@ try {
         apifyProxyCountry: 'IN'
     });
 
-    log.info(`Searching Sulekha India for "${keyword}" in "${location}"`);
+    log.info(`Searching Sulekha India...`);
     await Actor.charge({ eventName: 'apify-actor-start', count: 1 });
 
     let extractedCount = 0;
@@ -85,7 +84,7 @@ try {
                 if (providerName && providerName.length > 1) {
                     const record = {
                         providerName,
-                        category: keyword,
+                        category: '',
                         address,
                         phone,
                         rating: `${rating} ${reviews}`.trim(),
@@ -150,13 +149,14 @@ try {
         }
     });
 
-    const formatLocation = location.toLowerCase().replace(/\s+/g, '-');
-    const formatKeyword = keyword.toLowerCase().replace(/\s+/g, '-');
-    const startUrl = `https://www.sulekha.com/${formatKeyword}/${formatLocation}`;
-    
-    await crawler.addRequests([{
-        url: startUrl
-    }]);
+    if (startUrls && startUrls.length > 0) {
+        for (const req of startUrls) {
+            await crawler.addRequests([{ url: typeof req === 'string' ? req : req.url }]);
+        }
+    } else {
+        log.warning('No startUrls provided. Using default.');
+        await crawler.addRequests([{ url: 'https://www.sulekha.com/packers-and-movers/chennai' }]);
+    }
 
     armKillSwitch(crawler);
     await crawler.run();
